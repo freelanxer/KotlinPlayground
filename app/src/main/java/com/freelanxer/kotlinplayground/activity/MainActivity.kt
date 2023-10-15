@@ -2,6 +2,7 @@ package com.freelanxer.kotlinplayground.activity
 
 import android.os.Bundle
 import android.view.View
+import com.freelanxer.kotlinplayground.R
 import com.freelanxer.kotlinplayground.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
@@ -11,10 +12,15 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+        mBinding.startBtn.setOnClickListener(this)
     }
 
-    override fun onClick(p0: View?) {
-
+    override fun onClick(view: View?) {
+        if (view == null)
+            return
+        if (view == mBinding.startBtn)
+            showToast(R.string.start)
     }
 
 }
