@@ -8,7 +8,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 class RetrofitManager {
-    private val mockBaseUrl = "https://mock.apifox.cn/m1/3472734-0-default/"
+    private val mockBaseUrl = "https://mock.apifox.cn/m1/3472734-0-default/api/"
     private val okHttpClient: OkHttpClient
     private val retrofit: Retrofit
 
@@ -35,7 +35,10 @@ class RetrofitManager {
             .build()
     }
 
-    fun isDebug(): Boolean =
+    val service: ApiService
+        get() = retrofit.create(ApiService::class.java)
+
+    private fun isDebug(): Boolean =
         BuildConfig.BUILD_TYPE.contentEquals("debug")
 
 }
