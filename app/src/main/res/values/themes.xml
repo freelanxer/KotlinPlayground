@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.KotlinPlayground" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/purple_500</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
     </style>
 </resources>
