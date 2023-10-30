@@ -5,7 +5,7 @@ import com.freelanxer.kotlinplayground.model.FeatureListModel
 class FeatureRepository(private var service: ApiService): BaseRepository() {
 
     fun getFeatureList(userName: String, callback: Callback<ApiResult<FeatureListModel>>) {
-        service.getDemoList(userName).makeCall {
+        service.getFeatureList(userName).makeCall {
             onResponseSuccess = {
                 callback.onSuccess(it.body())
             }

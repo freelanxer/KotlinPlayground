@@ -35,8 +35,9 @@ class RetrofitManager {
             .build()
     }
 
-    val service: ApiService
-        get() = retrofit.create(ApiService::class.java)
+    val service: ApiService by lazy {
+        retrofit.create(ApiService::class.java)
+    }
 
     private fun isDebug(): Boolean =
         BuildConfig.BUILD_TYPE.contentEquals("debug")

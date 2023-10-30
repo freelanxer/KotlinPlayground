@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("Feature/GetFeatureList")
-    fun getDemoList(@Query("userName") userName: String): Call<ApiResult<FeatureListModel>>
+    fun getFeatureList(@Query("userName") userName: String): Call<ApiResult<FeatureListModel>>
 
 }
