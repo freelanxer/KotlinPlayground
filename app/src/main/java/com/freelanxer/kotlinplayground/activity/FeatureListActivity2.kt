@@ -2,8 +2,6 @@ package com.freelanxer.kotlinplayground.activity
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -12,9 +10,7 @@ import com.freelanxer.kotlinplayground.databinding.ActivityFeatureListBinding
 import com.freelanxer.kotlinplayground.model.FeatureModel
 import com.freelanxer.kotlinplayground.network.coroutines.ApiHelper
 import com.freelanxer.kotlinplayground.network.coroutines.RetrofitBuilder
-import com.freelanxer.kotlinplayground.network.coroutines.Status
 import com.freelanxer.kotlinplayground.viewmodel.FeatureListVM
-import com.freelanxer.kotlinplayground.viewmodel.FeatureVM
 import com.freelanxer.kotlinplayground.viewmodel.ViewModelFactory
 
 class FeatureListActivity2: BaseActivity(), FeatureAdapter.Listener {
@@ -31,7 +27,11 @@ class FeatureListActivity2: BaseActivity(), FeatureAdapter.Listener {
             this,
             ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)))[FeatureListVM::class.java]
 
-
+        // Observe
+        mViewModel.featureList.observe(this) {
+            mBinding.swiperLayout.isRefreshing = false
+            mFeatureAdapter.setData(it?.value?.featureList)
+        }
 
         mFeatureAdapter = FeatureAdapter(this)
         mBinding.featureListRv.setHasFixedSize(true)
@@ -43,24 +43,7 @@ class FeatureListActivity2: BaseActivity(), FeatureAdapter.Listener {
     }
 
     private fun getFeatureList(userName: String) {
-        // Observe
-        mViewModel.getFeatureList(userName).observe(this, Observer {
-            it?.let { resource ->
-                when(resource.status) {
-                    Status.SUCCESS -> {
-                        mBinding.swiperLayout.isRefreshing = false
-                        mFeatureAdapter.setData(resource.data?.value?.featureList)
-                    }
-                    Status.LOADING -> {
-
-                    }
-                    Status.ERROR -> {
-
-                    }
-                }
-
-            }
-        })
+        mViewModel.getFeatureList(this, userName)
     }
 
     private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
