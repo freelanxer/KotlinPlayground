@@ -12,7 +12,7 @@ class FeatureAdapter(
     RecyclerView.Adapter<FeatureAdapter.ViewHolder>() {
     private var mData: List<FeatureModel>? = null
 
-    fun setData(list: List<FeatureModel>) {
+    fun setData(list: List<FeatureModel>?) {
         mData = list
         notifyDataSetChanged()
     }

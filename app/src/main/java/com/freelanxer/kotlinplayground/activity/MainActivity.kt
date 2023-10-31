@@ -19,7 +19,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun launchMenuActivity() {
-        val intent = Intent(this, FeatureListActivity::class.java)
+        val intent = Intent(this, FeatureListActivity2::class.java)
         menuLauncher.launch(intent)
     }
 
